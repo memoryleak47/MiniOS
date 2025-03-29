@@ -16,7 +16,8 @@ QEMU=qemu-system-i386
 all: dir kernel.bin boot.bin os-image os
 
 run: 
-	$(QEMU) -hda ${BUILD}os.img
+	@# $(QEMU) -hda ${BUILD}os.img
+	$(QEMU) -drive file=${BUILD}os.img,format=raw
 
 debug:
 	$(QEMU) -fda ${BUILD}os.img -gdb tcp::9999 -S
@@ -38,7 +39,7 @@ kernel.bin: kernel/kernel_entry.o $(OBJ)
 	ld $(LD_FLAGS) -o ${BUILD}$@ -Ttext 0x1000 $^ --oformat binary
 
 %.o: %.c
-	gcc $(C_FLAGS) -c $< -o $@
+	gcc $(C_FLAGS) -c $< -o $@ -fno-pie
 
 dir:
 	mkdir -p $(BUILD)
