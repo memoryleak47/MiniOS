@@ -2,8 +2,13 @@
 #include "include/drivers/screen.h"
 #include "include/system.h"
 
+void __stack_chk_fail(void) {}
+
 void printi(){
-	print("OSxxxx\n");
+	// print("OSxxxx\n");
+	char x[] = {'O', 'S', 'x', 'x', 'x', 'x', '\n', '\0'};
+	print(x);
+
 	print("kernel 0.1v\n");
 }
 
