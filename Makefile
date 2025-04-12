@@ -30,7 +30,7 @@ os: $(BUILD)os-image
 	dd if=$< of=${BUILD}$@.img conv=notrunc
 
 boot.bin: boot/boot_sect.asm
-	nasm $(NASM_FLAGS) $< -f bin -I 'boot/' -o ${BUILD}$@
+	nasm $(NASMFLAGS) $< -f bin -I 'boot/' -o ${BUILD}$@
 
 %kernel_entry.o: kernel/kernel_entry.asm
 	nasm $< $(NASMFLAGS) -o kernel/kernel_entry.o
